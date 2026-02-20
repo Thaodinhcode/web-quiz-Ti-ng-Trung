@@ -7783,67 +7783,79 @@
                 </h2>
               </div>
 
-              <div className="max-w-3xl mx-auto space-y-6 relative">
-                <div className="relative">
-                  <label className="absolute -top-3 left-6 bg-wg-dark px-4 py-1 rounded-full text-sm font-bold text-wg-yellow">
-                    Hán Việt
-                  </label>
-                  <input
-                    ref={hanvietRef}
-                    type="text"
-                    value={hanvietInput}
-                    disabled={!!feedback}
-                    onChange={(e) => setHanvietInput(e.target.value)}
-                    onKeyDown={(e) =>
-                      e.key === "Enter" && hantuRef.current?.focus()
-                    }
-                    placeholder="nhập đáp án"
-                    className="ans-input w-full py-7 px-10 rounded-3xl text-center text-2xl font-normal text-white focus:border-wg-yellow focus:shadow-[0_0_30px_rgba(255,249,196,0.2)]"
-                    autoComplete="off"
-                  />
-                </div>
+              <div className="max-w-3xl mx-auto space-y-8">
 
-                <div className="relative">
-                  <label className="absolute -top-3 left-6 bg-wg-dark px-4 py-1 rounded-full text-sm font-bold text-wg-green">
-                    Hán Tự
-                  </label>
-                  <input
-                    ref={hantuRef}
-                    type="text"
-                    value={hantuInput}
-                    disabled={!!feedback}
-                    onChange={(e) => setHantuInput(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-                    placeholder="nhập đáp án"
-                    className="ans-input w-full py-7 px-10 rounded-3xl text-center text-2xl font-normal text-white focus:border-wg-green focus:shadow-[0_0_30px_rgba(0,245,160,0.2)]"
-                    autoComplete="off"
-                  />
-                </div>
+                  {/* Ô Hán Việt */}
+                  <div className="relative">
+                    <label className="absolute -top-3 left-6 bg-wg-dark px-4 py-1 rounded-full text-sm font-bold text-wg-yellow">
+                      Hán Việt
+                    </label>
+                    <input
+                      ref={hanvietRef}
+                      type="text"
+                      value={hanvietInput}
+                      disabled={!!feedback}
+                      onChange={(e) => setHanvietInput(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && hantuRef.current?.focus()}
+                      placeholder="nhập đáp án"
+                      className="ans-input w-full py-7 px-10 rounded-3xl text-center text-2xl font-normal text-white focus:border-wg-yellow focus:shadow-[0_0_30px_rgba(255,249,196,0.2)]"
+                      autoComplete="off"
+                    />
+                  </div>
 
-                <button
-                  onClick={handleSubmit}
-                  disabled={
-                    (!hanvietInput.trim() && !hantuInput.trim()) || !!feedback
-                  }
-                  className="absolute right-4 -bottom-4 px-8 py-3 rounded-full text-base font-black uppercase tracking-widest bg-wg-pink text-white hover:bg-white hover:text-wg-pink transition-all shadow-xl shadow-wg-pink/50 disabled:opacity-40"
-                >
-                  Submit
-                </button>
+                  {/* Ô Hán Tự + nút Submit nằm dưới góc phải */}
+                  <div className="relative">
+                    <label className="absolute -top-3 left-6 bg-wg-dark px-4 py-1 rounded-full text-sm font-bold text-wg-green">
+                      Hán Tự
+                    </label>
+                    <input
+                      ref={hantuRef}
+                      type="text"
+                      value={hantuInput}
+                      disabled={!!feedback}
+                      onChange={(e) => setHantuInput(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+                      placeholder="nhập đáp án"
+                      className="ans-input w-full py-7 px-10 rounded-3xl text-center text-2xl font-normal text-white focus:border-wg-green focus:shadow-[0_0_30px_rgba(0,245,160,0.2)]"
+                      autoComplete="off"
+                    />
 
-                <div className="h-12 mt-4">
-                  {feedback && (
-                    <p
-                      className={`text-xl font-medium italic tracking-wide ${
-                        feedback.type === "SUCCESS"
-                          ? "text-wg-green"
-                          : "text-wg-pink"
-                      }`}
+                    {/* Nút Submit - vị trí dưới cùng, sát phải */}
+                    <button
+                      onClick={handleSubmit}
+                      disabled={(!hanvietInput.trim() && !hantuInput.trim()) || !!feedback}
+                      className={`
+                        absolute 
+                        bottom-4 right-4
+                        px-8 py-3 
+                        rounded-full 
+                        text-base font-black uppercase tracking-widest
+                        bg-wg-pink text-white 
+                        hover:bg-white hover:text-wg-pink 
+                        transition-all duration-300
+                        shadow-xl shadow-wg-pink/50 
+                        disabled:opacity-50 disabled:cursor-not-allowed
+                        z-10
+                      `}
                     >
-                      {feedback.msg}
-                    </p>
-                  )}
+                      Submit
+                    </button>
+                  </div>
+
+                  {/* Phần feedback */}
+                  <div className="h-12 mt-2 text-center">
+                    {feedback && (
+                      <p
+                        className={`text-xl font-medium italic tracking-wide ${
+                          feedback.type === "SUCCESS" ? "text-wg-green" : "text-wg-pink"
+                        }`}
+                      >
+                        {feedback.msg}
+                      </p>
+                    )}
+                  </div>
+
                 </div>
-              </div>
 
               <div className="fixed bottom-8 left-0 right-0 flex flex-col items-center gap-3 z-50 pointer-events-none">
                 <div className="w-[60%] max-w-lg h-2 bg-white/10 rounded-full overflow-hidden">
